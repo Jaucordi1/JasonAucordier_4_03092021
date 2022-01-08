@@ -19,23 +19,23 @@
 			<img alt="logo" src="Logo.png" />
 		</div>
 		<nav class="main-navbar">
-			<a class="active" href="#"><span>Accueil</span></a>
-			<a href="#"><span>Détails de l'évènement</span></a>
+			<a class="active" href="#"><span>Détails de l'évènement</span></a>
 			<a href="#"><span>À propos</span></a>
 			<a href="#"><span>Contact</span></a>
 			<a href="#"><span>Évènements passés</span></a>
-			<a class="icon" href="javascript:void(0);" onclick="editNav()">
-				<i class="fa fa-bars"></i>
-			</a>
 		</nav>
+		<a class="icon" href="javascript:void(0);" onclick="editNav()">
+			<i class="fa fa-bars"></i>
+		</a>
 	</div>
 	<main>
 		<div class="hero-section">
 			<div class="hero-content">
-				<h1 class="hero-headline">Marathon national<br />de jeux vidéos</h1>
+				<h1 class="hero-headline">Marathon national <wbr>de jeux vidéos</h1>
 				<p class="hero-text">
 					Vous aimez jouer ? Notre prochain évènement gaming est ouvert
-					aux réservations... Places limitées ! </p>
+					aux réservations... Places limitées !
+				</p>
 				<button class="btn-signup modal-btn">je m'inscris</button>
 			</div>
 			<div class="hero-img">
@@ -49,84 +49,109 @@
 			<div class="content">
 				<span class="close"></span>
 				<div class="modal-body">
-					<form name="reserve" action="index.html" method="get" id="reserve-form">
+					<form name="reserve" action="index.html" method="get" id="reserve-form" novalidate>
 						<div class="formData">
-							<label for="first">Prénom</label><br />
-							<input class="text-control" type="text" name="first" id="first" minlength="2" /><br />
+							<label for="first">Prénom</label>
+							<input class="text-control" type="text" name="first" id="first"
+								oninput="hideError(this.parentNode, this);"
+								onblur="hideError(this.parentNode, this);" />
 						</div>
 						<div class="formData">
-							<label for="last">Nom</label><br />
-							<input class="text-control" type="text" name="last" id="last" /><br />
+							<label for="last">Nom</label>
+							<input class="text-control" type="text" name="last" id="last"
+								oninput="hideError(this.parentNode, this);"
+								onblur="hideError(this.parentNode, this);" />
 						</div>
 						<div class="formData">
-							<label for="email">E-mail</label><br />
-							<input class="text-control" type="email" name="email" id="email" /><br />
+							<label for="email">E-mail</label>
+							<input class="text-control" type="email" name="email" id="email"
+								oninput="hideError(this.parentNode, this);"
+								onblur="hideError(this.parentNode, this);" />
 						</div>
 						<div class="formData">
-							<label for="birthdate">Date de naissance</label><br />
-							<input class="text-control" type="date" name="birthdate" id="birthdate" /><br />
+							<label for="birthdate">Date de naissance</label>
+							<input class="text-control" type="date" name="birthdate" id="birthdate"
+								onkeyup="hideError(this.parentNode, this);"
+								onblur="hideError(this.parentNode, this);" />
 						</div>
 						<div class="formData">
-							<label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br />
-							<input type="number" class="text-control" name="quantity" id="quantity" max="99" min="0" />
+							<label for="quantity">A combien de tournois avez-vous déjà participé ?</label>
+							<input type="number" class="text-control" name="quantity" id="quantity"
+								oninput="hideError(this.parentNode, this);"
+								onblur="hideError(this.parentNode, this);" />
 						</div>
-						<p class="text-label">Quelles villes ?</p>
-						<div class="formData">
+						<p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
+						<div class="formData cities">
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location1" value="New York" />
+								id="location1" value="New York"
+								oninvalid="showError(this.parentNode, { id: this.name });"
+								oninput="hideError(this.parentNode, { id: this.name }, true);" />
 							<label class="checkbox-label" for="location1">
 								<span class="checkbox-icon"></span>
 								New York
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location2" value="San Francisco" />
+								id="location2" value="San Francisco"
+								oninvalid="showError(this.parentNode, { id: this.name });"
+								oninput="hideError(this.parentNode, { id: this.name }, true);" />
 							<label class="checkbox-label" for="location2">
 								<span class="checkbox-icon"></span>
 								San Francisco
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location3" value="Seattle" />
+								id="location3" value="Seattle"
+								oninvalid="showError(this.parentNode, { id: this.name });"
+								oninput="hideError(this.parentNode, { id: this.name }, true);" />
 							<label class="checkbox-label" for="location3">
 								<span class="checkbox-icon"></span>
 								Seattle
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location4" value="Chicago" />
+								id="location4" value="Chicago"
+								oninvalid="showError(this.parentNode, { id: this.name });"
+								oninput="hideError(this.parentNode, { id: this.name }, true);" />
 							<label class="checkbox-label" for="location4">
 								<span class="checkbox-icon"></span>
 								Chicago
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location5" value="Boston" />
+								id="location5" value="Boston" oninvalid="showError(this.parentNode, { id: this.name });"
+								oninput="hideError(this.parentNode, { id: this.name }, true);" />
 							<label class="checkbox-label" for="location5">
 								<span class="checkbox-icon"></span>
 								Boston
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location6" value="Portland" />
+								id="location6" value="Portland"
+								oninvalid="showError(this.parentNode, { id: this.name });"
+								oninput="hideError(this.parentNode, { id: this.name }, true);" />
 							<label class="checkbox-label" for="location6">
 								<span class="checkbox-icon"></span>
 								Portland
 							</label>
 						</div>
 						<div class="formData">
-							<input class="checkbox-input" form="reserve-form" type="checkbox" name="cgu" id="checkbox1"
-								checked required />
-							<label class="checkbox2-label" for="checkbox1">
+							<input class="checkbox-input" form="reserve-form" type="checkbox" name="cgu" id="cgu"
+								value="on" required checked="checked" onchange="hideError(this.parentNode, this);" />
+							<label class="checkbox2-label" for="cgu">
 								<span class="checkbox-icon"></span>
 								J'ai lu et accepté les conditions d'utilisation.
 							</label>
-							<br />
-							<input class="checkbox-input" form="reserve-form" type="checkbox" name="next_events"
-								id="checkbox2" />
-							<label class="checkbox2-label" for="checkbox2">
+						</div>
+						<div class="formData">
+							<input class="checkbox-input" form="reserve-form" type="checkbox" name="next-events"
+								id="next-events" />
+							<label class="checkbox2-label" for="next-events">
 								<span class="checkbox-icon"></span>
 								Je souhaite être prévenu des prochains évènements.
 							</label>
-							<br />
 						</div>
 						<input class="button btn-submit" type="submit" value="C'est parti" />
 					</form>
+					<div id="thank-you">
+						<p>Merci pour votre inscription</p>
+						<button class="button btn-signup">Fermer</button>
+					</div>
 				</div>
 			</div>
 		</div>

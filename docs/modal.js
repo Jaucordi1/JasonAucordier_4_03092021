@@ -15,53 +15,56 @@ const inputCities = inputCheckboxes.splice(0, 6);
 
 
 /***[ FORM VALIDATION VARS ]***
- ******************************
+ ******************************/
+/**
  * @typedef {'first' | 'last' | 'email' | 'birthdate' | 'quantity' | 'location' | 'cgu' | 'next-events'} IField
- * 
- * @typedef {(i: HTMLInputElement) => any} ExtractHelper
- * @typedef {(v: any) => any} FormatHelper
+ *
+ * @typedef {(i: HTMLInputElement) => } ExtractHelper
+ * @typedef {(v: any) => O} FormatHelper<O>
  * @typedef {(v: any) => true | string} ValidationHelper
  * @typedef {string | undefined} IError
- * @typedef {number | undefined} ITimer
- * 
+ *
  * @typedef {{
  *	input?: HTMLInputElement,
  *	inputs?: NodeListOf<HTMLInputElement>,
  *	extractValue: ExtractHelper,
- *	formatValue: FormatHelper,
+ *	formatValue: FormatHelper<IFormData<F>>,
  *	validation: ValidationHelper,
- *	error: IError,
- *	timer: ITimer
+ *	error: IError
  * }} IFieldHelper<F extends IField>
- * 
- * @type {Record<IField, IFieldHelper>} */
+ *
+ * @type {{
+ *	[K in IField]: IFieldHelper<K>
+ * }} */
 const FORM = {
 	first: {
 		input: form.querySelector('#first'),
 		extractValue: (i) => i.value,
-		formatValue: (v) => v,
+		formatValue: (v) => v.length > 0 ? v : null,
 		validation: (v) => {
-			if (v.length > 1) return true;
-			return 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
+			if (v === null) return 'Veuillez entrer votre prénom.';
+			if (v.length > 1) return 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
+			return true;
 		},
 		error: undefined,
 	},
 	last: {
 		input: form.querySelector('#last'),
 		extractValue: (i) => i.value,
-		formatValue: (v) => v,
+		formatValue: (v) => v.length > 0 ? v : null,
 		validation: (v) => {
-			if (v.length > 1) return true;
-			return 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+			if (v === null) return 'Veuillez entrer votre nom.';
+			if (v.length > 1) return 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+			return true;
 		},
 		error: undefined,
 	},
 	email: {
 		input: form.querySelector('#email'),
 		extractValue: (i) => i.value,
-		formatValue: (v) => v,
+		formatValue: (v) => v.length > 0 ? v : null,
 		validation: (v) => {
-			if (v.length === 0) return 'Veuillez entrer une adresse email.';
+			if (v === null) return 'Veuillez entrer une adresse email.';
 			const match = v.match(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/);
 			if (match === null) return 'Veuillez entrer une adresse email valide.';
 			return true;
@@ -157,8 +160,18 @@ function resetModal() {
 
 /***[ FORM FUNCTIONS ]***
  ************************/
-/** Retrieve form data and format them to a classic object
- * @returns {Record<string, unknown>} */
+/** Retrieve form data and format them to a classic JavaScript object
+ * @typedef {{
+ *	first: string | null,
+ *	last: string | null,
+ *	email: string | null,
+ *	birthdate: Date | null,
+ *	quantity: number | null,
+ *	location: string | null,
+ *	cgu: boolean,
+ *	'next-events': boolean
+ * }} IFormData
+ * @returns {IFormData} */
 function getFormData() {
 	const json = {};
 	Object.keys(FORM).forEach(id => {
@@ -178,8 +191,9 @@ function getFormData() {
 	return json;
 }
 /** Validate a single form field
- * @param {string} name Field name to validate the value
- * @param {unknown} value Value to validate for given field name
+ * @template {keyof IFormData} K
+ * @param {K} name Field name to validate the value
+ * @param {IFormData[K]} value Value to validate for given field name
  * @returns {boolean} */
 function valid(name, value) {
 	const helpers = FORM[name];
@@ -189,8 +203,8 @@ function valid(name, value) {
 
 	return validOrError === true;
 }
-/** Modal form validate process
- * @param {Record<string, unknown>} data 
+/** Validate retrieved form data
+ * @param {IFormData} data 
  * @returns {boolean} */
 function validate(data) {
 	const keys = Object.keys(data);
@@ -230,7 +244,6 @@ function submit(event = undefined) {
 				default:
 					elem = form.querySelector(`#${key}`);
 					if (error !== '') {
-						console.log(key, helpers.error);
 						showError(elem.parentNode, elem);
 					}
 					break;
@@ -240,6 +253,10 @@ function submit(event = undefined) {
 	}
 }
 
+/** Show error for given formData & input-like
+ * @param {HTMLElement} formData
+ * @param {HTMLInputElement | { id: string }} input
+ */
 function showError(formData, input) {
 	const helpers = FORM[input.id];
 
@@ -247,6 +264,11 @@ function showError(formData, input) {
 		formData.dataset.errorVisible = 'true';
 	formData.dataset.error = helpers.error || formData.dataset.error;
 }
+/** Hide error (after doing a re-validate, or when forced) for given formData & input-like
+ * @param {HTMLElement} formData
+ * @param {HTMLInputElement | { id: string }} input
+ * @param {boolean} force
+ */
 function hideError(formData, input, force = false) {
 	const helpers = FORM[input.id];
 
@@ -254,14 +276,15 @@ function hideError(formData, input, force = false) {
 	delete formData.dataset.error;
 
 	if (force !== true && !valid(input.id, helpers.formatValue(helpers.extractValue(input)))) {
+		console.log('really on error');
 		showError(formData, input);
 	}
 }
 
 
 
-/***[ LOGIC ]***
- ***************/
+/***[ EVENTS BINDING ]***
+ ************************/
 form.addEventListener('submit', submit, false);
 modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 modalCloseBtn.addEventListener('click', closeModal);

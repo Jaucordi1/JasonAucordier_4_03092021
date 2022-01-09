@@ -6,8 +6,8 @@
 	--navbar-height       : 8rem;
 	--radius              : 8px;
 	--checkbox-size       : 18px;
-	--checkbox-border-size: 1px;
-	--checkbox-offset     : 1px;
+	--checkbox-border-size: 1.5px;
+	--checkbox-offset     : 1.5px;
 
 	--modal-duration: .8s;
 }
@@ -258,12 +258,12 @@ main {
 	align-items    : center;
 	justify-content: flex-start;
 	
-	transition    : opacity var(--modal-duration) ease;
 	-webkit-pointer-events: none;
     -khtml-pointer-events: none;
     -moz-pointer-events: none;
     -ms-pointer-events: none;
 	pointer-events: none;
+	transition    : opacity var(--modal-duration) ease;
 }
 .bground.open {
 	opacity: 1;
@@ -275,6 +275,7 @@ main {
 	transition    : opacity var(--modal-duration) ease;
 }
 .bground > .content {
+	font-size: 1em;
 	color    : #FFFFFF;
 
 	width        : 100%;
@@ -288,38 +289,50 @@ main {
 	display        : flex;
 	flex-flow      : column nowrap;
 	justify-content: flex-start;
+	flex-grow: 1;
 
 	transform : translateY(-25%);
-
 	transition: transform var(--modal-duration) ease;
 }
 .bground.open > .content {
-	height: auto;
-	flex-grow: 1;
 	transform: translateY(0);
 }
 .modal-body {
+	font-size: 1.5em;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	flex-grow: 1;
+
 	margin : 0 auto;
-	padding: 2em 2em 0 2em;
+	padding: 1em 2em 0 2em;
+
+	min-height: 100%;
+	height: auto;
 }
 #reserve-form {
-	font-size: 1.4em;
+	font-size: .9em;
+
 	margin: 0;
+	margin-top: 1em;
 
 	display        : flex;
 	flex-flow      : column nowrap;
 	align-items    : stretch;
 	justify-content: flex-start;
 
-	height: auto;
 	transform: scaleY(1);
 	transition: transform .3s ease, height .3s ease;
 }
 :is(label, .text-label) {
+	font-size  : 1.05em;
 	font-family: var(--font-default);
-	font-weight: normal;
+	font-weight: lighter;
+	text-align: start;
 
-	margin : 1em 0 .5em 0;
+	margin : .5em 0;
 	padding: 0;
 	
 	display: inline-block;
@@ -328,14 +341,14 @@ main {
 	user-select: none;
 }
 input {
-	font-size  : 1.3em;
+	font-size  : 1.6em;
 	line-height: 1em;
 	border     : .08em solid #CCCCCC;
 	padding    : .6em 1em .5em 1em;
 	outline    : none;
 }
 .text-control {
-	font-size    : 1.3em;
+	font-size    : 1.6em;
 	line-height  : 1em;
 	width        : 100%;
 	padding      : .6em 1em .5em 1em;
@@ -348,7 +361,7 @@ input {
 	justify-content: flex-start;
 }
 .formData.cities {
-	font-size: .8em;
+	font-size: 1em;
 	flex-flow    : row wrap;
 	margin-bottom: 1em;
 }
@@ -384,6 +397,7 @@ input[data-error]::after {
 }
 .checkbox-label,
 .checkbox2-label {
+	font-size      : .8em;
 	font-weight    : normal;
 	position       : relative;
 	margin         : 0 1em .5em 0;
@@ -468,7 +482,7 @@ input[data-error]::after {
 	transition         : transform .3s ease, opacity .3s ease;
 }
 .close {
-	font-size: .7em;
+	font-size: 1em;
 	position : absolute;
 	right    : 1.5em;
 	top      : 1.5em;
@@ -484,7 +498,7 @@ input[data-error]::after {
 	position        : absolute;
 	left            : 1.5em;
 	content         : ' ';
-	height          : 3em;
+	height          : 2.5em;
 	width           : .3em;
 	background-color: #FFFFFF;
 }
@@ -503,16 +517,16 @@ input[data-error]::after {
 .btn-submit {
 	height: auto;
 }
+.modal-body.thank-you {
+	flex-grow: 1;
+}
 .modal-body.thank-you #reserve-form {
 	height: 0;
 	transform: scaleY(0);
 	transition: transform .3s ease, height .3s ease;
 }
-.modal-body.thank-you {
-	flex-grow: 1;
-}
 #thank-you {
-	font-size: 1.5em;
+	font-size: 1em;
 
 	display        : flex;
 	flex-grow      : 1;
@@ -520,6 +534,7 @@ input[data-error]::after {
 	align-items    : center;
 	justify-content: center;
 	
+	display: none;
 	padding: 2em 0;
 	overflow: hidden;
 	height: 0;
@@ -527,19 +542,25 @@ input[data-error]::after {
 
 	transition: transform .3s ease, height .3s ease;
 }
-#thank-you p {
-	font-size: 1.5em;
-	margin-top: auto;
-}
-#thank-you .button.btn-signup {
-	justify-self: flex-end;
-	margin-top: auto;
-	margin-bottom: 0;
-}
 .modal-body.thank-you #thank-you {
+	display: flex;
 	height: 100%;
 	transform: scaleY(1);
 	transition: transform .3s ease, height .3s ease;
+}
+#thank-you p {
+	font-size: 2.5em;
+	font-weight: lighter;
+	max-width: 7.6em;
+	margin-top: auto;
+	text-align: center;
+}
+#thank-you .button.btn-signup {
+	font-size: 1em;
+	padding: .5em 3em;
+	justify-self: flex-end;
+	margin-top: auto;
+	margin-bottom: 0;
 }
 
 /* FOOTER */
@@ -557,7 +578,7 @@ footer {
 }
 
 button, .button, .modal-btn, .btn-signup, .btn-submit {
-	font-size: 1.5em;
+	font-size: 1em;
 
 	padding      : 2.5% 10%;
 	margin       : 1em auto;
@@ -593,11 +614,13 @@ button, .button, .modal-btn, .btn-signup, .btn-submit {
 		display: none;
 	}
 	main {
-		font-size: 2em;
+		font-size: 1em;
 		margin : 2em 3em;
 		padding: 0;
 	}
 	.hero-section {
+		font-size: 2.1em;
+
 		height    : auto;
 		padding   : 0;
 		box-shadow: 0 .2em .7em .2em rgba(0, 0, 0, 0.2);
@@ -631,7 +654,7 @@ button, .button, .modal-btn, .btn-signup, .btn-submit {
 		bottom     : 0;
 	}
 	.hero-content .btn-signup {
-		font-size: .7em;
+		font-size: .6em;
 		display: block;
 		padding: .5em 1.4em;
 		margin-left: 0;
@@ -665,7 +688,9 @@ button, .button, .modal-btn, .btn-signup, .btn-submit {
 		justify-content : center;
 	}
 	.bground > .content {
+		min-height: 80%;
 		border-radius: var(--radius);
+		flex-grow: 0;
 	}
 	.bground.open > .content {
 		height: auto;

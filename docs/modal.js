@@ -150,7 +150,7 @@ function closeModal(event = undefined) {
 /** Reset modal form values */
 function resetModal() {
 	form.reset();
-	setTimeout(() => modalBody.classList.remove('thank-you'), 300);
+	setTimeout(() => modalBody.classList.remove('thank-you'), 800);
 }
 
 

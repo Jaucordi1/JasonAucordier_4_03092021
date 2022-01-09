@@ -373,6 +373,7 @@ input {
 
 	content: attr(data-error);
 
+	width        : 100%;
 	opacity      : 0;
 	margin-top   : .3em;
 	margin-bottom: .5em;

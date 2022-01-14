@@ -226,6 +226,7 @@ function submit(event = undefined) {
 
 	if (validation) {
 		modalBody.classList.add('thank-you');
+		console.log('Data sent :', data);
 	} else {
 		Object.keys(FORM).forEach(key => {
 			const helpers = FORM[key];

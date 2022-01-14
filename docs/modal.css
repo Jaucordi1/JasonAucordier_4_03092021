@@ -685,7 +685,6 @@ button, .button, .modal-btn, .btn-signup, .btn-submit {
 		max-width: 400px;
 	}
 	.bground {
-		background-color: white;
 		justify-content : center;
 	}
 	.bground > .content {

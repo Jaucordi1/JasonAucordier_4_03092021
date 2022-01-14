@@ -43,7 +43,7 @@ const FORM = {
 		formatValue: (v) => v.length > 0 ? v : null,
 		validation: (v) => {
 			if (v === null) return 'Veuillez entrer votre prénom.';
-			if (v.length > 1) return 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
+			if (v.length < 2) return 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
 			return true;
 		},
 		error: undefined,
@@ -54,7 +54,7 @@ const FORM = {
 		formatValue: (v) => v.length > 0 ? v : null,
 		validation: (v) => {
 			if (v === null) return 'Veuillez entrer votre nom.';
-			if (v.length > 1) return 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+			if (v.length < 2) return 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
 			return true;
 		},
 		error: undefined,

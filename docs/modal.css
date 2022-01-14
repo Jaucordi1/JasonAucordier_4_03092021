@@ -696,6 +696,11 @@ button, .button, .modal-btn, .btn-signup, .btn-submit {
 	.bground.open > .content {
 		height: auto;
 	}
+	.modal-body {
+		overflow-y: auto;
+		padding-left : 3em;
+		padding-right: 3em;
+	}
 	#reserve-form {
 		font-size: 1em;
 	}

@@ -24,7 +24,7 @@
 			<a href="#"><span>Contact</span></a>
 			<a href="#"><span>Évènements passés</span></a>
 		</nav>
-		<a class="icon" href="javascript:void(0);" onclick="editNav()">
+		<a class="icon" href="javascript:void(0);">
 			<i class="fa fa-bars"></i>
 		</a>
 	</div>
@@ -52,79 +52,58 @@
 					<form name="reserve" action="index.html" method="get" id="reserve-form" novalidate>
 						<div class="formData">
 							<label for="first">Prénom</label>
-							<input class="text-control" type="text" name="first" id="first"
-								oninput="hideError(this.parentNode, this);"
-								onblur="hideError(this.parentNode, this);" />
+							<input class="text-control" type="text" name="first" id="first" />
 						</div>
 						<div class="formData">
 							<label for="last">Nom</label>
-							<input class="text-control" type="text" name="last" id="last"
-								oninput="hideError(this.parentNode, this);"
-								onblur="hideError(this.parentNode, this);" />
+							<input class="text-control" type="text" name="last" id="last" />
 						</div>
 						<div class="formData">
 							<label for="email">E-mail</label>
-							<input class="text-control" type="email" name="email" id="email"
-								oninput="hideError(this.parentNode, this);"
-								onblur="hideError(this.parentNode, this);" />
+							<input class="text-control" type="email" name="email" id="email" />
 						</div>
 						<div class="formData">
 							<label for="birthdate">Date de naissance</label>
-							<input class="text-control" type="date" name="birthdate" id="birthdate"
-								onkeyup="hideError(this.parentNode, this);"
-								onblur="hideError(this.parentNode, this);" />
+							<input class="text-control" type="date" name="birthdate" id="birthdate" />
 						</div>
 						<div class="formData">
 							<label for="quantity">A combien de tournois avez-vous déjà participé ?</label>
-							<input type="number" class="text-control" name="quantity" id="quantity"
-								oninput="hideError(this.parentNode, this);"
-								onblur="hideError(this.parentNode, this);" />
+							<input type="number" class="text-control" name="quantity" id="quantity" />
 						</div>
 						<p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
 						<div class="formData cities">
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location1" value="New York"
-								oninvalid="showError(this.parentNode, { id: this.name });"
-								oninput="hideError(this.parentNode, { id: this.name }, true);" />
+								id="location1" value="New York" />
 							<label class="checkbox-label" for="location1">
 								<span class="checkbox-icon"></span>
 								New York
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location2" value="San Francisco"
-								oninvalid="showError(this.parentNode, { id: this.name });"
-								oninput="hideError(this.parentNode, { id: this.name }, true);" />
+								id="location2" value="San Francisco" />
 							<label class="checkbox-label" for="location2">
 								<span class="checkbox-icon"></span>
 								San Francisco
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location3" value="Seattle"
-								oninvalid="showError(this.parentNode, { id: this.name });"
-								oninput="hideError(this.parentNode, { id: this.name }, true);" />
+								id="location3" value="Seattle" />
 							<label class="checkbox-label" for="location3">
 								<span class="checkbox-icon"></span>
 								Seattle
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location4" value="Chicago"
-								oninvalid="showError(this.parentNode, { id: this.name });"
-								oninput="hideError(this.parentNode, { id: this.name }, true);" />
+								id="location4" value="Chicago" />
 							<label class="checkbox-label" for="location4">
 								<span class="checkbox-icon"></span>
 								Chicago
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location5" value="Boston" oninvalid="showError(this.parentNode, { id: this.name });"
-								oninput="hideError(this.parentNode, { id: this.name }, true);" />
+								id="location5" value="Boston" />
 							<label class="checkbox-label" for="location5">
 								<span class="checkbox-icon"></span>
 								Boston
 							</label>
 							<input class="checkbox-input" type="radio" form="reserve-form" name="location"
-								id="location6" value="Portland"
-								oninvalid="showError(this.parentNode, { id: this.name });"
-								oninput="hideError(this.parentNode, { id: this.name }, true);" />
+								id="location6" value="Portland" />
 							<label class="checkbox-label" for="location6">
 								<span class="checkbox-icon"></span>
 								Portland
@@ -132,7 +111,7 @@
 						</div>
 						<div class="formData">
 							<input class="checkbox-input" form="reserve-form" type="checkbox" name="cgu" id="cgu"
-								value="on" required checked="checked" onchange="hideError(this.parentNode, this);" />
+								value="on" required checked="checked" />
 							<label class="checkbox2-label" for="cgu">
 								<span class="checkbox-icon"></span>
 								J'ai lu et accepté les conditions d'utilisation.

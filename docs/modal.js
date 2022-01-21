@@ -1,6 +1,7 @@
 /***[ DOM Elements ]***
  **********************/
 const navbar = document.getElementById("myTopnav");
+const navbarOpener = navbar.querySelector('.icon');
 const modalBtn = document.querySelectorAll('.modal-btn');
 const modalbg = document.querySelector('.bground');
 const modalBody = modalbg.querySelector('.modal-body');
@@ -8,7 +9,11 @@ const modalCloseBtn = modalbg.querySelector('.close');
 const modalFinishBtn = modalbg.querySelector('#thank-you .button');
 const form = document.querySelector('#reserve-form');
 /** @type {HTMLInputElement[]} */
-const inputCheckboxes = Array.from(form.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], input[type="number"], input[type="checkbox"], input[type="radio"]').values());
+const inputCheckboxes = Array.from(
+	form.querySelectorAll(
+		'input[type="text"], input[type="email"], input[type="date"], input[type="number"], input[type="checkbox"], input[type="radio"]'
+	).values()
+);
 const inputs = inputCheckboxes.splice(0, 5);
 const inputCities = inputCheckboxes.splice(0, 6);
 
@@ -77,9 +82,16 @@ const FORM = {
 		formatValue: (v) => v === '' ? null : new Date(v),
 		validation: (v) => {
 			if (v === null) return 'Veuillez entrer votre date de naissance.';
+
 			const now = Date.now();
 			if (v >= now) return 'Vous n\'êtes pas né dans le futur. ;)';
-			if (now - v > 1000 * 60 * 60 * 24 * 365 * 150) return 'Vous n\'avez pas plus de 150 ans. ;)';
+
+			const oneYear = 1000 * 60 * 60 * 24 * 365;
+			if (v >= now - (oneYear * 3)) return 'Vous jouez avant vos 3 ans ?';
+
+			const diff = now - v;
+			if (diff > oneYear * 150) return 'Vous n\'avez pas plus de 150 ans. ;)';
+
 			return true;
 		},
 		error: undefined,
@@ -290,3 +302,19 @@ form.addEventListener('submit', submit, false);
 modalBtn.forEach((btn) => btn.addEventListener('click', launchModal));
 modalCloseBtn.addEventListener('click', closeModal);
 modalFinishBtn.addEventListener('click', closeModal);
+navbarOpener.addEventListener('click', (ev) => {
+	ev.preventDefault();
+	editNav();
+});
+
+inputs.forEach((input) => {
+	input.addEventListener('input', () => hideError(input.parentNode, input));
+	input.addEventListener('blur', () => hideError(input.parentNode, input));
+});
+inputCities.forEach((input) => {
+	input.addEventListener('input', () => hideError(input.parentNode, { id: input.name }, true));
+	input.addEventListener('invalid', () => showError(input.parentNode, { id: input.name }));
+});
+inputCheckboxes.forEach((input) => {
+	input.addEventListener('change', () => hideError(input.parentNode, input));
+});
